@@ -1,0 +1,123 @@
+.burger-icon {
+    width: 100px;
+    height: 100px;
+    fill: var(--svg-color);
+}
+
+rect {
+    x: 0;
+    rx: 5px;
+    width: 100px;
+    height: 20px;
+    transform-origin: center;
+}
+
+.rect-1 {
+    y: 0;
+}
+
+.rect-2 {
+    y: 40px;
+}
+
+.rect-3 {
+    y: 80px;
+}
+
+[data-expanded="true"] .rect-1 {
+    y: 40px;
+    rotate: 45deg;
+}
+
+[data-expanded="true"] .rect-2 {
+    opacity: 0;
+}
+
+[data-expanded="true"] .rect-3 {
+    y: 40px;
+    rotate: -45deg;
+}
+
+/* Disable animations when browser indicates to reduce amount of animations */
+@media (prefers-reduced-motion: no-preference) {
+    rect {
+        transition:
+            y 0.3s 0.3s,
+            opacity 0.3s,
+            rotate 0.3s;
+    }
+
+    [data-expanded="true"] rect {
+        transition:
+            y 0.3s,
+            opacity 0.3s,
+            rotate 0.3s 0.3s cubic-bezier(.55, -0.65, 0, 2.32);
+    }
+}
+
+/* Appearance Mode */
+:root {
+    color-scheme: light dark;
+    color: canvasText;
+    background-color: canvas;
+}
+
+.burger-icon {
+    --svg-color: canvasText;
+}
+
+/* Deco */
+
+body {
+    min-height: 100dvh;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    font-family: system-ui;
+    font-size: 1.8rem;
+}
+
+.burger-button {
+    border: 0;
+    padding: 0;
+    line-height: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.burger-button:focus-visible {
+    /* affichage du focus lors de la navigation au clavier */
+    outline: 4px dashed hotpink;
+    outline-offset: 5px;
+}
+
+
+
+.navigation {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 4px dotted orange;
+}
+
+/* Styles SVG */
+
+svg {
+    /* Par défaut les navigateurs masquent ce qui dépasse du Viewbox */
+    /* ressource : https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/overflow */
+    overflow: visible;
+}
+
+svg * {
+    /* Par défaut le référent pour transform-origin est l'ensemble du SVG (view-box) */
+    /* ressource : https://developer.mozilla.org/en-US/docs/Web/CSS/transform-box#svg_transform-origin_scoping */
+    transform-box: fill-box;
+}
+
+#navigation::before {
+    display: inline-block;
+    margin-top: 4rem;
+    padding: 6px;
+    content: "nav " attr(data-state);
+    font-size: 1.4rem;
+    border: 1px dotted #ddd;
+}
