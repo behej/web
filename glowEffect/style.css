@@ -10,6 +10,21 @@ body {
     font-family: 'Poppins', 'sans-serif';
 }
 
+.credentials {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.credentials h3,
+.credentials p,
+.credentials a {
+    color: #d6d6d6;
+    margin: 5px;
+}
+
 .cards-container {
     width: 1000px;
     position: relative;
@@ -125,8 +140,7 @@ body {
     gap: 1rem;
     align-items: center;
     justify-content: space-around;
-    /* min-height: 100vh; */
-    margin: 100px;
+    margin: 30px;
 }
 
 button {
