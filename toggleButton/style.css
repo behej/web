@@ -1,6 +1,7 @@
 :root {
-    --slider_width: 7vw;
-    --slider_height: 70px;
+    --slider_width: 30vw;
+    --slider_height: 150px;
+    --slider_padding: 10px;
     --ball_padding: 10px;
     --cross_thickness: calc(var(--slider_height) / 7);
 }
@@ -11,7 +12,7 @@
     width: var(--slider_width);
     height: var(--slider_height);
     display: flex;
-    padding: 10px;
+    padding: var(--slider_padding);
     background-color: lightsalmon;
     justify-content: flex-start;
     border-radius: var(--slider_height);
@@ -48,10 +49,12 @@
 
 .cross1 {
     transform: translateY(-50%) rotate(-45deg);
+    background-color: yellow;
 }
 
 .cross2 {
     transform: translateY(-50%) rotate(45deg);
+    background-color: red;
 }
 
 input:checked+label .slider {
@@ -64,12 +67,19 @@ input:checked+label .ball {
 }
 
 input:checked+label .cross1 {
-    transform: translateY(-50%) rotate(45deg) translate(30%, 110%);
-    width: calc((100% - 20px) / 2);
+    transform:
+        translateY(-50%) rotate(45deg) translateY(calc((var(--slider_height) / 2 - var(--ball_padding) - var(--slider_padding)) * 0.866));
+
+
+    width: calc((100% - 2 * var(--ball_padding)) / 2);
 }
 
 input:checked+label .cross2 {
-    transform: translateY(-50%) rotate(135deg) translate(0%, -100%);
+    transform:
+        /* translate(calc((100% - 2 * var(--ball_padding)) * 0.0067), -50%)*/
+        translateY(-50%) rotate(135deg) translateY(calc(-0.5 * (var(--slider_height) / 2 - var(--slider_padding) - var(--ball_padding)) + (var(--cross_thickness) / 2))) translateX(calc((var(--cross_thickness) / 2 - var(--slider_padding) - var(--ball_padding)) * -0.134));
+    /* translate(0, calc(-0.3 * (var(--slider_height) - 2 * var(--ball_padding) - 2 * var(--slider_padding))));*/
+    width: calc((100% - 2 * var(--ball_padding)) * 0.866);
 }
 
 input {
